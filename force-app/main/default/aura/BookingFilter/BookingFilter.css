@@ -1,0 +1,32 @@
+.THIS .boxLayout {
+    box-shadow: 0 0 6px 0 hsla(0,0%,66%,.5);
+    border: 1px solid #e1e1e1;
+    background-color: #fff;
+    border-radius: 0.3rem;
+}
+
+.THIS .sectionHeader{
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.THIS .topbar{
+    background: rgb(3,183,219);
+    background: linear-gradient(90deg, rgba(3,183,219,1) 0%, rgba(5,64,111,1) 44%, rgba(8,1,83,0.9360119047619048) 100%);
+    padding: 15px;
+}
+
+.THIS .logoCustom{
+    height: 100px;
+    width: 160px;
+}
+
+.THIS .error-div{
+    padding: 15px;
+}
+
+.THIS .error-message{
+    color: red;
+    text-align: center;
+    font-weight: 700;
+}

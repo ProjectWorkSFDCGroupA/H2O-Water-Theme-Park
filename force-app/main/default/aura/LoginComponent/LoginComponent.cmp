@@ -1,0 +1,33 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global" controller="ThemeParkController" >
+    <aura:attribute name="Email" type="String"/>
+    <aura:attribute name="Passkey" type="String"/>
+    <aura:attribute name="customerObj" type="Id"/>
+    
+    <div class="comp-body">
+        <div class="slds-grid slds-wrap card-content">
+            <div class="slds-col slds-large-size_1-of-3 slds-size_1-of-1" >
+                <div class="slds-card" style="border-radius: 1.5rem">
+                    <div class="slds-card__header slds-align_absolute-center">
+                        <img class="logoCustom" src="{!$Resource.LogoPark}" alt="H2O Logo" />
+                    </div>
+                    <div class="slds-card__body form-body">
+                        <div class="slds-p-horizontal--small">
+                            <div class="label-div">
+                                <p class="label-header">Email</p>
+                                <lightning:input aura:id="customerField" value="{!v.Email}"/>
+                            </div>
+                            <div class="label-div">
+                                <p class="label-header">Pass Key</p>
+                                <lightning:input aura:id="customerField" type="password" value="{!v.Passkey}"/>
+                            </div>
+                            <div class="footer-div">
+                                <lightning:button class="slds-button_stretch button-class" label="Login Now" variant="brand" onclick="{!c.handleLogin}"/>
+                                <a onclick="{!c.signupHandler}" class="loginUser">New User? Sign-up</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

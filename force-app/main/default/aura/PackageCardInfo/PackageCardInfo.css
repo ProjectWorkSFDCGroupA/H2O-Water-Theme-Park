@@ -1,0 +1,49 @@
+.THIS .avatarCustom{
+    
+    padding-top: 10px;
+    height: 190px;
+    width: 190px;
+}
+
+.THIS .customLevel{
+    font-size: 28px;
+    font-family: cursive;
+    font-weight: 900;
+    color: #E05363;
+    margin-top: -35px;
+}
+
+.THIS.package-item{
+    box-shadow: 0 0 6px 0 hsla(0,0%,66%,.5);
+    border: 1px solid #e1e1e1;
+    
+}
+
+.THIS .svgcustom{
+    height: 31px;
+    width: 20px;
+    display: inline-block;
+}
+
+.THIS .name-header{
+    padding: 25px 0 15px 0;
+    font-weight: bold;
+    color: #1b5297;
+    font-size: 20px;
+    font-family: cursive;
+    
+}
+
+.THIS .ride-item{
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.THIS .button-option{
+    margin-top: 70px;
+}
+
+.THIS .cost-format{
+    font-weight: bold;
+    font-size: 20px;
+}

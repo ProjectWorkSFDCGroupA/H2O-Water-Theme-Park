@@ -1,0 +1,109 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" controller="ThemeParkController">
+    
+    <aura:attribute name="rideId" type="Id"/>
+    <aura:attribute name="simpleRecord" type="Object"/>
+    <aura:attribute name="rideRecord" type="Object"/>
+    <aura:attribute name="recordError" type="String"/>
+    <aura:attribute name="isOpen" type="Boolean" default="true"/>
+    <aura:attribute name="packages" type="String[]"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <force:recordData aura:id="recordLoader"
+                      fields="Ride_Name__c, Level__c, Restrictions__c, Description__c"
+                      recordId="{!v.rideId}"
+                      targetFields="{!v.rideRecord}"
+                      targetError="{!v.recordError}"
+                      targetRecord="{!v.simpleRecord}"
+                      mode="VIEW"
+                      />
+    <aura:if isTrue="{!v.isOpen}">
+        <div class="slds-m-around_xx-large"> 
+            <!-- Modal dialog box-->
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container slds-scrollable scrollview">
+                    <!-- header of modal -->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{!c.closeModal}"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate heading-specs">
+                            <div class="slds-clearfix">
+                                <div class="slds-float_left">
+                                    <img class="logoCustom" src="{!$Resource.LogoPark}"/>
+                                </div>
+                                <lightning:formattedText value="{!v.rideRecord.Ride_Name__c}"/>
+                                <div class="slds-float_right">
+                                    <img class="logoCustom" src="{!$Resource.LogoPark}"/>
+                                </div>
+                            </div>
+                        </h2>
+                        
+                        
+                    </header>
+                    
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <div class="slds-grid slds-wrap slds-p-horizontal--large">
+                            <div class="slds-col slds-small-size_1-of-1 slds-p-top_small">
+                                <div class="section-header">
+                                    <span class="svg-span">
+                                        <img src="https://www.flaticon.com/svg/static/icons/svg/2921/2921124.svg" class="svg-custom"/>
+                                    </span>
+                                    <span>
+                                        <h4 class="desc-header">What is this?</h4>
+                                    </span>
+                                </div>
+                                <lightning:formattedText value="{!v.rideRecord.Description__c}"></lightning:formattedText>
+                                
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap slds-p-horizontal--large">
+                            <div class="slds-col slds-small-size_1-of-1 slds-p-top_medium">
+                                <div class="section-header">
+                                    <span class="svg-span">
+                                        <img src="https://www.flaticon.com/svg/static/icons/svg/1672/1672451.svg" class="svg-custom"/>
+                                    </span>
+                                    <span>
+                                        <h4 class="desc-header">Restrictions</h4>
+                                    </span>
+                                </div>
+                                <lightning:formattedRichText value="{!v.rideRecord.Restrictions__c}"/>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap slds-p-horizontal--large">
+                            <div class="slds-col slds-small-size_1-of-1 slds-p-top_medium">
+                                <div class="section-header">
+                                    <span class="svg-span">
+                                        <img src="https://www.flaticon.com/svg/static/icons/svg/753/753344.svg" class="svg-custom"/>
+                                    </span>
+                                    <span>
+                                        <h4 class="desc-header">Included In</h4>
+                                    </span>
+                                </div>
+                                <div class="slds-grid slds-wrap">
+                                    <aura:iteration items="{!v.packages}" var="package">
+                                        <div class="slds-col slds-small-size_1-of-2 slds-p-around_xx-small">
+                                            <li>
+                                                <lightning:formattedText value="{!package}"></lightning:formattedText>
+                                            </li>
+                                        </div>
+                                    </aura:iteration>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning:button variant="neutral" 
+                                          label="Cancel"
+                                          title="Cancel"
+                                          onclick="{! c.closeModal }"/>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </aura:if>
+</aura:component>

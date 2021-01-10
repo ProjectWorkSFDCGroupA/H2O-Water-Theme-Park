@@ -1,0 +1,149 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global" controller="ThemeParkController">
+    
+    <aura:attribute name="customerId" type="Id"/>
+    <aura:attribute name="packageObj" type="Package__c"/>
+    <aura:attribute name="isOpen" type="Boolean"/>
+    <aura:attribute name="visitingDate" type="Date"/>
+    <aura:attribute name="cost" type="Integer" default="{!v.packageObj.Cost__c}"/>
+    <aura:attribute name="packageId" type="Id" default="{!v.packageObj.Id}"/> 
+    <aura:attribute name="noOfTickets" type="Integer"/>
+    <aura:attribute name="cvv" type="Integer"/>
+    <aura:attribute name="ticket" type="Ticket__c" default="{'sObjectType':'Ticket__c'}"/>
+    <aura:attribute name="isBooking" type="Boolean" default="false"/>
+    <aura:attribute name="totalPrice" type="Integer"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:if isTrue= "{!v.isOpen}">
+        <div class="slds-m-around_xx-large"> 
+            <!-- Modal dialog box-->
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container slds-scrollable scrollview">
+                    <!-- header of modal -->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{!c.closeModal}"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate heading-specs">
+                            <div class="slds-clearfix">
+                                <div class="slds-float_left">
+                                    <img class="logoCustom" src="{!$Resource.LogoPark}"/>
+                                </div>
+                                <lightning:formattedText value="{!v.packageObj.Name__c}"/>
+                                <div class="slds-float_right">
+                                    <img class="logoCustom" src="{!$Resource.LogoPark}"/>
+                                </div>
+                            </div>
+                        </h2>
+                    </header>
+                    
+                    <!--Body of Modal-->
+                    
+                    <lightning:recordEditForm aura:id = "ticket-form"
+                                              objectApiName = "Ticket__c"
+                                              onsubmit = "{!c.confirmTicket}">
+                        
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                            <div class="slds-grid slds-wrap slds-p-horizontal-large">
+                                <div class="slds-col slds-size_1-of-1">
+                                    <div class="section-header">
+                                        <h2 class="desc-header" style="margin-left: 12px">Ticket Information</h2>
+                                    </div>	
+                                </div>
+                                <div class="slds-col slds-size_1-of-1">
+                                    <div class="label-div">
+                                        <lightning:inputField fieldName="Contact__c" 
+                                                              aura:id="customerField" value="{!v.ticket.Contact__c}" disabled="true"/>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1">
+                                    <div class="label-div">
+                                        <lightning:inputField fieldName="Package__c" 
+                                                              aura:id="packageField" value="{!v.ticket.Package__c}" disabled="true"/>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <div class="label-div">
+                                        <lightning:inputField fieldName="Name_on_Ticket__c" 
+                                                              aura:id="ticketField" value="{!v.ticket.Name_on_Ticket__c}" />
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <div class="label-div">
+                                        <lightning:messages/>
+                                        <lightning:inputField fieldName="No_of_Tickets__c" onchange="{!c.getNoOfTickets}" 
+                                                              aura:id="noOfTicketsField" value="{!v.ticket.No_of_Tickets__c}" />
+                                    </div>
+                                </div>
+                                
+                                <div class="slds-col slds-size_1-of-2">
+                                    <div class="label-div">
+                                        <lightning:messages/>
+                                        <lightning:inputField fieldName= "Visiting_Date__c" 
+                                                              aura:id="dateField"
+                                                              disabled="true"
+                                                              value="{!v.ticket.Visiting_Date__c}"
+                                                              />
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-m-top_medium">
+                                    <div class="section-header">
+                                        <h2 class="desc-header" style="margin-left: 12px">Card Information</h2>
+                                    </div>	
+                                </div>
+                                <aura:if isTrue="{!v.isBooking}">
+                                	<div class="charge-div slds-col slds-size_1-of-1 slds-m-top_medium">
+                                    	<h4>You will be charged:&nbsp;&nbsp;</h4>
+                                        <lightning:formattedNumber style="currency" value="{!v.totalPrice}"/>
+                                    </div>
+                                </aura:if>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <div class="label-div">
+                                        <lightning:messages/>
+                                        <lightning:inputField fieldName="Name_on_Card__c" 
+                                                              aura:id="ticketField" value="{!v.ticket.Name_on_Card__c}" />
+                                    </div>
+                                </div>
+                                
+                                
+                                <div class="slds-col slds-size_1-of-2">
+                                    <div class="label-div">
+                                        <lightning:messages/>
+                                        <lightning:inputField fieldName="Card_Number__c" 
+                                                              aura:id="cardNumberField" value="{!v.ticket.Card_Number__c}" />
+                                    </div>
+                                </div>
+                                
+                                <div class="slds-col slds-size_1-of-2">
+                                    <div class="cvv-div">
+                                        <lightning:input label="CVV" class="slds-m-around_small" type="password"
+                                                         minlength="3" maxlength="3" value="{!v.cvv}" required="true"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        <footer class="slds-modal__footer">
+                            <lightning:button variant="neutral" 
+                                              label="Cancel"
+                                              title="Cancel"
+                                              onclick="{!c.closeModal }"/>
+                            <lightning:button variant="Brand"
+                                              label="Confirm"
+                                              type="submit"/>
+                        </footer>
+                    </lightning:recordEditForm>
+                    
+                </div>
+                
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </aura:if>
+    
+</aura:component>

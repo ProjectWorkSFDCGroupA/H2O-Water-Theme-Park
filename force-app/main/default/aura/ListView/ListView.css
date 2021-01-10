@@ -1,0 +1,24 @@
+.THIS.topbar{
+    padding: 15px!important;
+    background: rgb(3,183,219);
+    background: linear-gradient(90deg, rgba(3,183,219,1) 0%, rgba(5,64,111,1) 44%, rgba(8,1,83,0.9360119047619048) 100%);
+}
+
+.THIS.listview{
+    background-color: #dfe7ed;
+    
+}
+.THIS .scrollView{
+    
+    overflow-y: auto;
+    max-height: 722px;
+    
+}
+
+.THIS .slds-form-element__label{
+    font-family: cursive;
+    font-variant: all-petite-caps;
+    font-weight: 800;
+    font-size: 15px;
+    margin-right: 5px;
+}

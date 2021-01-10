@@ -1,0 +1,38 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global" >
+    
+    <aura:attribute name="rideObj" type="Ride__c"/>
+    <aura:registerEvent name="getRideDetailsEvt" type="c:GetRideDetailsEvent"/>
+    
+    <div class="slds-card ride-item">
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-medium-size_4-of-12 slds-small-size_1-of-1">
+                <div class="slds-clearfix slds-p-around_small">
+                        <img src="{!v.rideObj.Ride_Picture__c}" class="avatarCustom"/>
+                </div>
+            </div>
+            <div class="slds-col slds-medium-size_5-of-12 slds-small-size_1-of-1 slds-p-bottom_small">
+                <h3 class="slds-text-heading_small slds-m-bottom_xx-small name-header">{!v.rideObj.Ride_Name__c}</h3>
+                <p class="desc-paragraph">{!v.rideObj.Description__c}</p>
+                <br/>
+                
+                <div class="levelIcon">
+                    <span class="slds-m-right_x-small">
+                        <img src="https://www.flaticon.com/svg/static/icons/svg/3176/3176367.svg" class="svgcustom"/>
+                    </span>
+                    <span class="ride-level">
+                        {!v.rideObj.Level__c}
+                    </span>
+                </div>
+                
+            </div>
+            <div class="slds-col slds-m-top_large slds-medium-size_3-of-12 slds-small-size_1-of-1 slds-align_absolute-center slds-clearfix">
+                
+                <lightning:button label="Get Details"
+                                  iconName="action:new_note"
+                                  class="slds-float--left button-option"
+                                  variant="Brand"
+                                  onclick="{!c.fireGetRideEvt}"/>
+            </div>
+        </div>
+    </div>
+</aura:component>

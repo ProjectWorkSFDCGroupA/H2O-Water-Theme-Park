@@ -1,0 +1,92 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global" controller="ThemeParkController">
+    
+    <aura:handler event="c:BookingFilterEvent" action="{!c.handleFilterEvent}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="getRideDetailsEvt" event="c:GetRideDetailsEvent" action="{!c.handleGetRideEvt}"/>
+    <aura:handler name="packageEvt" event="c:PackageEvent" action="{!c.handlePackageEvt}"/>
+    
+    <aura:attribute name="rideOpen" type="boolean" default="true"/>
+    <aura:attribute name="packageOpen" type="boolean" default="false"/>
+    <aura:attribute name="ticketHistoryOpen" type="boolean" default="false"/>
+    
+    <aura:attribute name="displayType" type="String"/>
+    <aura:attribute name="rides" type="Ride__c[]"/>
+    <aura:attribute name="packages" type="Package__c[]"/>
+    <aura:attribute name="isRideModalOpen" type="Boolean" default="false"/>
+    <aura:attribute name="isBookingModalOpen" type="Boolean" default="false"/>
+    <aura:attribute name="rideObj" type="Ride__c"/>
+    <aura:attribute name="packageObj" type="Package__c"/>
+    <aura:attribute name="cusRecId" type="Id"/>
+    <aura:attribute name="level" type="String" default="%"/>
+    <aura:attribute name="visitingDate" type="Date"/>
+    <aura:attribute name="ticketList" type="Ticket__c" default="{'sObjectType':'Ticket__c'}"/>
+    
+    <aura:attribute name="priceVal" type="Integer" default="120"/>
+    <aura:attribute name="rideVal" type="Integer" default="5"/>
+    
+    <div class="topbar"></div>
+    <div aura:id="dynamic" class="slds-card listview slds-p-around_small">
+        <div class="toggler slds-m-around_small">
+            <lightning:input aura:id="toggleValue"
+                             type="toggle"
+                             label="View Ticket History"
+                             checked="false"
+                             onchange="{!c.handleToggleChange}"/>
+        </div>
+        <aura:if isTrue="{!v.packageOpen}">
+                <div class="slds-grid slds-m-around_small" style="position: sticky">
+                    <div class="slds-col slds-size_1-of-2">
+                        <!--<lightning:button label="Sort By : Price" variant="Brand" iconName="utility:arrowup" onclick="{!c.sortByPriceUp}"/>-->
+                    	<lightning:slider 
+                                          label="Price Range"
+                                          min="60"
+                                          max="260"
+                                          step="10"
+                                          value="{!v.priceVal}"
+                                          onchange="{!c.handleFilter}"/>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slider">
+                       <lightning:slider
+                                          label="No of Rides"
+                                          min="2"
+                                          max="16"
+                                          step="2"
+                                          value="{!v.rideVal}"
+                                          onchange="{!c.handleFilter}"/>
+                    </div>
+                </div>
+        </aura:if>
+        <div class="scrollView">
+            <aura:if isTrue="{!v.rideOpen}">
+                <aura:iteration items="{!v.rides}" var="ride">
+                    <div class="slds-p-around_small">
+                        <c:RideCardInfo rideObj="{!ride}"/>
+                    </div>
+                </aura:iteration>
+            </aura:if>
+            <aura:if isTrue="{!v.packageOpen}">
+                <aura:iteration items="{!v.packages}" var="package">
+                    <div class="slds-p-around_small">
+                        <c:PackageCardInfo visitingDate="{!v.visitingDate}" packageObj="{!package}" packageId="{!package.Id}"/>
+                    </div>
+                </aura:iteration>
+            </aura:if>
+            <aura:if isTrue="{!v.ticketHistoryOpen}">
+                <div class="slds-grid slds-p-around_small ticket-div">
+                    <aura:iteration items="{!v.ticketList}" var="ticket">
+                        <div calss="slds-col slds-size_1-of-3">
+                            <c:TicketHistory ticketObj="{!ticket}"/>
+                        </div>
+                    </aura:iteration>
+                </div>
+            </aura:if>
+        </div>
+    </div>
+    <aura:if isTrue="{!v.isRideModalOpen}">
+        <c:RideDetailsModal rideId="{!v.rideObj.Id}" isOpen="{!v.isRideModalOpen}"/>
+    </aura:if>
+    
+    <aura:if isTrue="{!v.isBookingModalOpen}">
+        <c:BookTicketModal visitingDate="{!v.visitingDate}" customerId="{!v.cusRecId}" packageObj="{!v.packageObj}" isOpen="{!v.isBookingModalOpen}"/>
+    </aura:if>
+</aura:component>

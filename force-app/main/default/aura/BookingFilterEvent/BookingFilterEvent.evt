@@ -1,0 +1,5 @@
+<aura:event type="APPLICATION" description="Event template">
+    <aura:attribute name="visitingDate" type="Date"/>
+    <aura:attribute name="displayType" type="String"/>
+    <aura:attribute name="level" type="String"/>
+</aura:event>

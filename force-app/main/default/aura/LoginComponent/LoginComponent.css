@@ -1,0 +1,49 @@
+.THIS.comp-body{
+    background: rgb(3,183,219);
+    background: linear-gradient(90deg, rgba(3,183,219,1) 0%, rgba(5,64,111,1) 44%, rgba(8,1,83,0.9360119047619048) 100%);
+}
+
+.THIS .card-content{
+    padding: 80px;
+    height: 625px;
+}
+
+.THIS .form-body{
+    padding: 35px;
+}
+
+.THIS .logoCustom{
+    
+    height: 130px;
+    width: 160px;
+    margin-bottom: -40px;
+}
+
+.THIS .label-header{
+    margin-left: 2px;
+    margin-bottom: -15px;
+}
+
+.THIS .label-header:after{
+    content: " *";
+    color: red;
+}
+
+.THIS .label-div{
+    padding-bottom: 15px;
+}
+
+.THIS .button-class{
+    border-radius: 0.8rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.THIS .loginUser{
+    color: blue;
+}
+
+.THIS .footer-div{
+    text-align: center;
+    margin-top: 25px;
+}

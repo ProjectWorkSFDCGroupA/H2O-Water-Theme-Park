@@ -1,0 +1,50 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global" >
+    
+    <aura:attribute name="newCustomer" type="Object"/>
+    <aura:attribute name="simpleNewCustomer" type="Object"/>
+    <aura:attribute name="newCustomerError" type="String"/>
+    <force:recordData aura:id="customerRecordCreator"
+                      fields="FirstName,LastName,Phone,Email"
+                      targetRecord="{!v.newCustomer}"
+                      targetFields ="{!v.simpleNewCustomer}"
+                      targetError="{!v.newCustomerError}"
+                      />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <div class="comp-body">
+        <div class="slds-grid slds-wrap card-content">
+            <div class="slds-col slds-large-size_1-of-3 slds-size_1-of-1" >
+                <div class="slds-card" style="border-radius: 1.5rem">
+                    <div class="slds-card__header slds-align_absolute-center">
+                        <img class="logoCustom" src="{!$Resource.LogoPark}" alt="H2O Logo" />
+                    </div>
+                    <div class="slds-card__body form-body">
+                        <div class="slds-p-horizontal--small">
+                            <div class="label-div">
+                                <p class="label-header">First Name</p>
+                                <lightning:input aura:id="customerField" value="{!v.simpleNewCustomer.FirstName}"/>
+                            </div>
+                            
+                            <div class="label-div">
+                                <p class="label-header">Last Name</p>
+                                <lightning:input aura:id="customerField" value="{!v.simpleNewCustomer.LastName}"/>
+                            </div>
+                            <div class="label-div">
+                                <p class="label-header">Phone</p>
+                                <lightning:input aura:id="customerField" value="{!v.simpleNewCustomer.Phone}"/>
+                            </div>
+                            <div class="label-div">
+                                <p class="label-header">Email</p>
+                                <lightning:input aura:id="customerField" value="{!v.simpleNewCustomer.Email}"/>
+                            </div>
+                            <div class="footer-div">
+                                <lightning:button class="slds-button_stretch button-class" label="Register" variant="brand" onclick="{!c.handleRegister}"/>
+                                <a onclick="{!c.loginHandler}" class="loginUser">Already a User? Login</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

@@ -1,0 +1,54 @@
+.THIS.mainDiv {
+    border: 1px solid #f1f1f1;
+    border-radius: 1.5rem;
+    background-color: transparent;
+    width: 250px;
+    height: 300px;
+    overflow-y: hidden;
+}
+
+.THIS .flip-card-inner {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.THIS.mainDiv:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.THIS .flip-card-front,.THIS .flip-card-back {
+    border-radius: 1.5rem;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background: rgb(3,183,219);
+    background: linear-gradient(90deg, rgba(3,183,219,1) 0%, rgba(5,64,111,1) 44%, rgba(8,1,83,0.9360119047619048) 100%);
+}
+
+.THIS .flip-card-back{
+    transform: rotateY(180deg);
+    
+}
+
+.THIS .card-subtitle{
+    font-size: 25px;
+    text-align: center;
+    color: white;
+    font-family: cursive;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.THIS .field{
+    
+    color: white;
+    margin-top: 15px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+}

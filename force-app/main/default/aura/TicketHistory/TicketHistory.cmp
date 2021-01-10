@@ -1,0 +1,23 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" controller="ThemeParkController">
+    <aura:attribute name="fileId" type="Attachment"/>
+    <aura:attribute name="ticketObj" type="Ticket__c"/>
+    <div class="slds-card mainDiv slds-m-around_small slds-p-around_medium">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img class="logo-image" src="{!$Resource.LogoPark}" />
+                <h3 class="card-subtitle">{!v.ticketObj.Package__r.Name__c}</h3>
+            </div>
+            <div class="slds-p-around_small flip-card-back">
+                <div class="line-div">
+                    <p class="field">Name:&nbsp;&nbsp;<lightning:formattedText value="{!v.ticketObj.Name_on_Ticket__c}"/></p>
+                    <p class="field">Number of Tickets:&nbsp;&nbsp;<lightning:formattedNumber value="{!v.ticketObj.No_of_Tickets__c}"/></p>
+                    <p class="field">Total Cost:&nbsp;&nbsp;<lightning:formattedNumber style="currency" value="{!v.ticketObj.Total_Price__c}"/></p>
+                    <p class="field">Day of Visit:&nbsp;&nbsp;<lightning:formattedDateTime value="{!v.ticketObj.Visiting_Date__c}" year="numeric" day="2-digit" month="long" timeZone="UTC"/></p>
+                    <p class="field">
+                        <lightning:button label="Get Ticket" variant="Brand" iconName="utility:page"/>
+                    </p>
+                </div> 
+            </div>
+        </div>
+    </div>
+</aura:component>

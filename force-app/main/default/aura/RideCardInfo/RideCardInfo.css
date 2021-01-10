@@ -1,0 +1,51 @@
+.THIS .avatarCustom{
+    padding-top: 20px;
+    padding-left: 20px;
+    height: 200px;
+    width: 225px;
+}
+
+.THIS.ride-item{
+    box-shadow: 0 0 6px 0 hsla(0,0%,66%,.5);
+    border: 1px solid #e1e1e1;
+}
+
+.THIS .name-header{
+    padding: 25px 0 15px 0;
+    font-weight: bold;
+    color: #1b5297;
+    font-size: 20px;
+    font-family: cursive;
+    padding-left: 25px;
+    
+}
+
+.THIS .desc-paragraph{
+    font-family: sans-serif;
+    padding-left: 25px;
+}
+
+.THIS .ride-level{
+    padding-bottom: 20px;
+    font-weight: 1000;
+}
+
+.THIS .button-option{
+    margin-top: 60px;
+    margin-bottom: 25px;
+}
+
+.THIS .levelIcon{
+    margin-right: 40px;
+    align-items: center;
+    display: flex;
+    font-size: 12px;
+    padding-left: 25px;
+}
+
+.THIS .svgcustom{
+    margin-bottom: 20px;
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+}
